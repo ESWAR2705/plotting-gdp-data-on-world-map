@@ -20,7 +20,14 @@ def reconcile_countries_by_name(plot_countries, gdp_countries):
       gdp_countries The set contains the country codes from
       plot_countries that were not found in gdp_countries.
     """
-    return {}, set()
+    country_codes = {}
+    missing_counts = set()
+    for code, country in plot_countries.items():
+        if country in gdp_countries:
+            country_codes[code] = country
+        else:
+            missing_counts.add(code)
+    return country_codes, missing_counts
 
 
 def build_map_dict_by_name(gdpinfo, plot_countries, year):
