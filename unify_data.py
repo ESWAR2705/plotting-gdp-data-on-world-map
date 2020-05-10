@@ -7,6 +7,29 @@ import csv
 import math
 import pygal
 
+def read_csv_as_nested_dict(filename, keyfield, separator, quote):
+    """
+    Inputs:
+      filename  - Name of CSV file
+      keyfield  - Field to use as key for rows
+      separator - Character that separates fields
+      quote     - Character used to optionally quote fields
+
+    Output:
+      Returns a dictionary of dictionaries where the outer dictionary
+      maps the value in the key_field to the corresponding row in the
+      CSV file.  The inner dictionaries map the field names to the
+      field values for that row.
+    """
+    nested_dict = {}
+    with open(filename, newline='') as csvfile:
+        csvreader = csv.DictReader(csvfile, delimiter=separator, quotechar=quote)
+        for row in csvreader:
+            rowid = row[keyfield]
+            nested_dict[rowid] = row
+    return nested_dict
+
+
 def reconcile_countries_by_name(plot_countries, gdp_countries):
     """
     Inputs:
@@ -47,7 +70,29 @@ def build_map_dict_by_name(gdpinfo, plot_countries, year):
       codes from plot_countries that were found in the GDP data file, but
       have no GDP data for the specified year.
     """
-    return {}, set(), set()
+    country_codes = {}
+    found_countries = set()
+    unfound_countries = set()
+
+    filename = gdpinfo["gdpfile"]
+    keyfield = gdpinfo['country_name']
+    separator = gdpinfo["separator"]
+    quote = gdpinfo["quote"]
+    gdpdata = read_csv_as_nested_dict(filename, keyfield, separator, quote)
+
+    codes, unfound_countries = reconcile_countries_by_name(plot_countries, gdpdata)
+
+    for code in codes:
+        for country in gdpdata:
+            if codes[code] == country:
+                if year in gdpdata[country]:
+                    if gdpdata[country][year] != "":
+                        country_codes[code] = math.log10(int(gdpdata[country][year]))
+                    else:
+                        found_countries.add(code)
+                else:
+                    unfound_countries.add(code)
+    return country_codes, unfound_countries, found_countries
 
 
 def render_world_map(gdpinfo, plot_countries, year, map_file):
