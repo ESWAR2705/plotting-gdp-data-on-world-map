@@ -8,6 +8,29 @@ import math
 import pygal
 
 
+def read_csv_as_nested_dict(filename, keyfield, separator, quote):
+    """
+    Inputs:
+      filename  - Name of CSV file
+      keyfield  - Field to use as key for rows
+      separator - Character that separates fields
+      quote     - Character used to optionally quote fields
+
+    Output:
+      Returns a dictionary of dictionaries where the outer dictionary
+      maps the value in the key_field to the corresponding row in the
+      CSV file.  The inner dictionaries map the field names to the
+      field values for that row.
+    """
+    nested_dict = {}
+    with open(filename, newline='') as csvfile:
+        csvreader = csv.DictReader(csvfile, delimiter=separator, quotechar=quote)
+        for row in csvreader:
+            rowid = row[keyfield]
+            nested_dict[rowid] = row
+    return nested_dict
+
+
 def build_country_code_converter(codeinfo):
     """
     Inputs:
@@ -18,7 +41,19 @@ def build_country_code_converter(codeinfo):
       are world bank country codes, where the code fields in the
       code file are specified in codeinfo.
     """
-    return {}
+    codes_dict = {}
+
+    codefile = codeinfo["codefile"]
+    keyfield = codeinfo["plot_codes"]
+    separator = codeinfo["separator"]
+    quote = codeinfo["quote"]
+    codeinfo_data = read_csv_as_nested_dict(codefile, keyfield, separator, quote)
+
+    for code in codeinfo_data:
+        data_code = codeinfo["data_codes"]
+        codes_dict[code] = codeinfo_data[code][data_code]
+
+    return codes_dict
 
 
 def reconcile_countries_by_code(codeinfo, plot_countries, gdp_countries):
