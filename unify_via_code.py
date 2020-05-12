@@ -7,6 +7,28 @@ import csv
 import math
 import pygal
 
+#gdpinfo = {
+#    "gdpfile": "isp_gdp.csv",
+#    "separator": ",",
+#    "quote": '"',
+#    "min_year": 1960,
+#    "max_year": 2015,
+#    "country_name": "Country Name",
+#    "country_code": "Country Code"
+#}
+
+#codeinfo = {
+#    "codefile": "isp_country_codes.csv",
+#    "separator": ",",
+#    "quote": '"',
+#    "plot_codes": "ISO3166-1-Alpha-2",
+#    "data_codes": "ISO3166-1-Alpha-3"
+#}
+
+#plot_countries = pygal.maps.world.COUNTRIES
+#print("=======Plot Countries=======")
+#for country in plot_countries:
+    #print(country, plot_countries[country])
 
 def read_csv_as_nested_dict(filename, keyfield, separator, quote):
     """
@@ -30,6 +52,13 @@ def read_csv_as_nested_dict(filename, keyfield, separator, quote):
             nested_dict[rowid] = row
     return nested_dict
 
+#filename = gdpinfo["gdpfile"]
+#keyfield = gdpinfo["country_name"]
+#separator = gdpinfo["separator"]
+#quote = gdpinfo["quote"]
+#gdpdata = read_csv_as_nested_dict(filename, keyfield, separator, quote)
+#for item in gdpdata:
+    #print(gdpdata[item])
 
 def build_country_code_converter(codeinfo):
     """
@@ -55,6 +84,7 @@ def build_country_code_converter(codeinfo):
 
     return codes_dict
 
+#converted_codes = build_country_code_converter(codeinfo)
 
 def reconcile_countries_by_code(codeinfo, plot_countries, gdp_countries):
     """
@@ -76,8 +106,33 @@ def reconcile_countries_by_code(codeinfo, plot_countries, gdp_countries):
       the codes with the exact same case as they have in
       plot_countries and gdp_countries.
     """
-    return {}, set()
+    codes_mapping = {}
+    not_found = set()
+    converted_codes = build_country_code_converter(codeinfo)
 
+#    print('=====GDP DATA=====')
+#    for item in gdp_countries:
+#        print(item, gdp_countries[item][gdpinfo["country_code"]])
+
+#    print('=====Converted Plot country codes -> WB codes====')
+#    print(converted_codes)
+
+    for pygal_code in plot_countries:
+        for gdp_country in gdp_countries:
+            gdp_code = gdp_countries[gdp_country]["Country Code"]
+#            gdp_code = gdp_countries[gdp_country][gdpinfo["country_code"]]
+            if converted_codes[pygal_code.upper()] in gdp_code:
+                codes_mapping[pygal_code] = gdp_code
+
+    for pygal_code in plot_countries:
+        if pygal_code not in codes_mapping:
+            not_found.add(pygal_code)
+
+    return codes_mapping, not_found
+
+#print(reconcile_countries_by_code(codeinfo, plot_countries, gdpdata))
+
+#print('MAPPING', reconcile_countries_by_code(codeinfo, plot_countries, gdp_countries))
 
 def build_map_dict_by_code(gdpinfo, codeinfo, plot_countries, year):
     """
