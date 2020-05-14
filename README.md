@@ -1,7 +1,7 @@
 # Plotting GDP Data on World Map
 **Plotting GDP Data on World Map** is the final project of the [Python Data Visualization](https://www.coursera.org/learn/python-visualization/home/welcome)course on Coursera platform. 
 
-The main task of this project is to process the World Bank GDP data and build a dictionary whose values represented the GDP data for a given year that can be plotted with Pygal. 
+The main task of this project is to process the World Bank GDP data and build a dictionary whose values represented the GDP data for a given year that can be plotted with [Pygal](http://www.pygal.org/en/stable/index.html). 
 
 It consists of two parts.
 * [Part 1](#part1): To link Pygal's map dictionary (mapping 2-letter country codes to country names) to a dictionary that stored World Bank GDP country data keyed by the "Country Name" field and to plot GDP data on world map. 
@@ -44,3 +44,22 @@ The **build_map_dict_by_code** function should return a dictionary and two sets.
 4. Create an SVG image of the GDP data plotted on the world map
 
 The **render_world_map** function takes ```gdpinfo```, a GDP information dictionary, ```codeinfo```, a country code information dictionary, ```plot_countries```, a dictionary mapping country codes used by *Pygal* to the corresponding country name, and ```year```, the string year for which to create a GDP map dictionary, and ```map_file```, the string name of the file to write the output plot to.
+## Prerequisites
+To run the project, **Pygal** Python module is required. It is available in [PyPI](https://pypi.org/), and can be installed by typing the following command as *superuser*.
+```sh
+pip install pygal
+```
+The application can be used explicitely with ```isp_gdp.csv file```. The current version of isp_gdp.csv file is downloaded from [course materials](https://storage.googleapis.com/codeskulptor-isp/course4/isp_gdp.csv). It contains GDP data up until the end of 2015, and this file is slightly updated to handle missing GDP data in a more consistent manner.
+
+To use data from another file (including files with other separators), change the ```gdpinfo``` dictionary structure accordingly.
+```sh
+    gdpinfo = {
+        "gdpfile": "isp_gdp.csv",        # Name of the GDP CSV file
+        "separator": ",",                # Separator character in CSV file
+        "quote": '"',                    # Quote character in CSV file
+        "min_year": 1960,                # Oldest year of GDP data in CSV file
+        "max_year": 2015,                # Latest year of GDP data in CSV file
+        "country_name": "Country Name",  # Country name field name
+        "country_code": "Country Code"   # Country code field name
+    }
+```
