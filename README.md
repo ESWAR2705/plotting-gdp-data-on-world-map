@@ -45,6 +45,16 @@ The **build_map_dict_by_code** function should return a dictionary and two sets.
 
 The **render_world_map** function takes ```gdpinfo```, a GDP information dictionary, ```codeinfo```, a country code information dictionary, ```plot_countries```, a dictionary mapping country codes used by *Pygal* to the corresponding country name, and ```year```, the string year for which to create a GDP map dictionary, and ```map_file```, the string name of the file to write the output plot to.
 ## Data Used
+### ```plot_countries``` dictionary
+The ```plot_countries``` is a dictionary mapping country codes used by *Pygal* to the corresponding country name. It has the following format.
+```sh
+ad Andorra
+ae United Arab Emirates
+af Afghanistan
+al Albania
+am Armenia
+...
+```
 ### GDP information dictionary ```gdpinfo```
 
 The ```gdpinfo``` dictionary contains the raw economic data collected by the World Bank. The ```isp_gdp.csv``` file with data on GDP in current US dollars is downloaded from [course materials](https://storage.googleapis.com/codeskulptor-isp/course4/isp_gdp.csv). The first two columns correspond to the *"Country Name"* and *"Country Code"* for each country in the file. Subsequent fields include GDP data (in current US dollars) for the years from 1960-2015 inclusive.
