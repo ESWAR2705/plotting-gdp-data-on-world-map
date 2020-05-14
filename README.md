@@ -3,11 +3,11 @@
 
 The main task of this project is to process the World Bank GDP data and build a dictionary whose values represented the GDP data for a given year that can be plotted with [Pygal](http://www.pygal.org/en/stable/index.html). 
 
-It consists of two parts.
-* [Part 1](#part1): To link Pygal's map dictionary (mapping 2-letter country codes to country names) to a dictionary that stored World Bank GDP country data keyed by the "Country Name" field and to plot GDP data on world map. 
-* [Part 2](#part2): To improve the quality of the world map plots created in Part 1 by creating a better mapping from pygal country codes to World Bank country names.
+The project consists of two parts.
+* [Part 1](#part1). To link Pygal's map dictionary (mapping 2-letter country codes to country names) to a dictionary that stored World Bank GDP country data keyed by the "Country Name" field and to plot GDP data on world map. 
+* [Part 2](#part2). To improve the quality of the world map plots created in Part 1 by creating a better mapping from pygal country codes to World Bank country names.
 ## Part 1 <a name="part1"></a>
-In **Part 1** of the project the following problems are solved.
+In Part 1 the following problems are solved.
 1. Creating a dictionary that maps Pygal country codes to World Bank country names
 
 The **reconcile_countries_by_name** function takes ```plot_countries```, a dictionary mapping country codes used by a plot library (such as *Pygal*) to the corresponding country name, and ```gdp_countries```, a dictionary whose keys are the country names used within the GDP data. 
@@ -25,7 +25,7 @@ The **build_map_dict_by_name** function should return a dictionary and two sets.
 The **render_world_map** function takes ```gdpinfo```, a GDP information dictionary, ```plot_countries```, a dictionary mapping country codes used by *Pygal* to the corresponding country name, and ```year```, the string year for which to create a GDP map dictionary, and ```map_file```, the string name of the file to write the output plot to.
 
 ## Part 2 <a name="part2"></a>
-In **Part 2** or the project the following problems are solved.
+In Part 2 the following problems are solved.
 
 1. Generate a dictionary that maps different country codes to each other
 
