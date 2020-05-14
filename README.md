@@ -63,3 +63,13 @@ To use data from another file (including files with other separators), change th
         "country_code": "Country Code"   # Country code field name
     }
 ```
+The application also can be used explicitely with ```isp_country_codes.csv``` file.
+```sh
+codeinfo = {
+        "codefile": "isp_country_codes.csv", # Name of the country code CSV file
+        "separator": ",",                    # Separator character in CSV file
+        "quote": '"',                        # Quote character in CSV file
+        "plot_codes": "ISO3166-1-Alpha-2",   # Plot code field name
+        "data_codes": "ISO3166-1-Alpha-3"    # GDP data code field name
+    }
+```
