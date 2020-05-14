@@ -55,13 +55,14 @@ al Albania
 am Armenia
 ...
 ```
-### GDP information dictionary ```gdpinfo```
+### ```gdpinfo``` dictionary
+The ```gdpinfo``` is a GDP information dictionary. It specifies information about GDP data file. The current GDP data file ```isp_gdp.csv``` is downloaded from [course materials](https://storage.googleapis.com/codeskulptor-isp/course4/isp_gdp.csv) and contains the raw economic data collected from the World Bank. The first two columns of CSV file correspond to the *"Country Name"* and *"Country Code"* for each country in the file. Subsequent fields include GDP data (in current US dollars) for the years from 1960-2015 inclusive.
 
-The ```gdpinfo``` dictionary contains the raw economic data collected by the World Bank. The ```isp_gdp.csv``` file with data on GDP in current US dollars is downloaded from [course materials](https://storage.googleapis.com/codeskulptor-isp/course4/isp_gdp.csv). The first two columns correspond to the *"Country Name"* and *"Country Code"* for each country in the file. Subsequent fields include GDP data (in current US dollars) for the years from 1960-2015 inclusive.
-
- **Important!** This file is slightly modified to handle missing GDP data in a more consistent manner.
+ **Important!** The current ```isp_gdp.csv``` file is slightly modified to handle missing GDP data in a more consistent manner.
  
 As the format of the CSV file that stores the GDP data could change (or you could acquire data from somewhere else), the functions that operate directly on the data will all take a "gdpinfo" dictionary that provides information about the file. 
+
+The ```gdpinfo``` contains the following items. All keys are strings.
 
 ```sh
     gdpinfo = {
