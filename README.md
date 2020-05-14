@@ -73,3 +73,14 @@ codeinfo = {
         "data_codes": "ISO3166-1-Alpha-3"    # GDP data code field name
     }
 ```
+## Running
+To get GDP by country unified by common name, run the following command.
+```sh
+$ python unify_via_name.py
+```
+To get GDP by country unified by common code, run the following command.
+```sh
+$ python unify_via_code.py
+```
+## Authors
+Alexandra Baturina
