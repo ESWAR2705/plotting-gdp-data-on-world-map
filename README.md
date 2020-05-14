@@ -62,7 +62,7 @@ The ```gdpinfo``` is a GDP information dictionary. It specifies information abou
  
 As the format of the CSV file that stores the GDP data could change (or you could acquire data from somewhere else), the functions that operate directly on the data will all take a "gdpinfo" dictionary that provides information about the file. 
 
-The ```gdpinfo``` contains the following items. All keys are strings.
+The ```gdpinfo``` dictionary contains the following items.
 
 ```sh
     gdpinfo = {
@@ -75,7 +75,22 @@ The ```gdpinfo``` contains the following items. All keys are strings.
         "country_code": "Country Code"   # Country code field name
     }
 ```
+### ```codeinfo``` dictionary
+The ```codeinfo``` is a country code information dictionary that is used to access the country codes from the Open Knowledge Network's [collection](http://data.okfn.org/data/core/country-codes). The current version of country codes data is organised in ```isp_country_codes.csv``` file downloaded from [course materials](https://storage.googleapis.com/codeskulptor-isp/course4/isp_country_codes.csv).
 
+ **Important!** The current ```isp_country_codes.csv``` file is slightly modified to handle missing GDP data in a more consistent manner.
+ 
+The ```codeinfo``` dictionary contains the following items.
+ 
+```sh
+codeinfo = {
+        "codefile": "isp_country_codes.csv", # Name of the country code CSV file
+        "separator": ",",                    # Separator character in CSV file
+        "quote": '"',                        # Quote character in CSV file
+        "plot_codes": "ISO3166-1-Alpha-2",   # Plot code field name
+        "data_codes": "ISO3166-1-Alpha-3"    # GDP data code field name
+    }
+```
 ## Prerequisites
 To run the project, **Pygal** Python module is required. It is available in [PyPI](https://pypi.org/), and can be installed by typing the following command as *superuser*.
 ```sh
