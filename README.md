@@ -44,6 +44,27 @@ The **build_map_dict_by_code** function should return a dictionary and two sets.
 4. Create an SVG image of the GDP data plotted on the world map
 
 The **render_world_map** function takes ```gdpinfo```, a GDP information dictionary, ```codeinfo```, a country code information dictionary, ```plot_countries```, a dictionary mapping country codes used by *Pygal* to the corresponding country name, and ```year```, the string year for which to create a GDP map dictionary, and ```map_file```, the string name of the file to write the output plot to.
+## Data Used
+### GDP information dictionary ```gdpinfo```
+
+The ```gdpinfo``` dictionary contains the raw economic data collected by the World Bank. The ```isp_gdp.csv``` file with data on GDP in current US dollars is downloaded from [course materials](https://storage.googleapis.com/codeskulptor-isp/course4/isp_gdp.csv). The first two columns correspond to the *"Country Name"* and *"Country Code"* for each country in the file. Subsequent fields include GDP data (in current US dollars) for the years from 1960-2015 inclusive.
+
+ **Important!** This file is slightly modified to handle missing GDP data in a more consistent manner.
+ 
+As the format of the CSV file that stores the GDP data could change (or you could acquire data from somewhere else), the functions that operate directly on the data will all take a "gdpinfo" dictionary that provides information about the file. 
+
+```sh
+    gdpinfo = {
+        "gdpfile": "isp_gdp.csv",        # Name of the GDP CSV file
+        "separator": ",",                # Separator character in CSV file
+        "quote": '"',                    # Quote character in CSV file
+        "min_year": 1960,                # Oldest year of GDP data in CSV file
+        "max_year": 2015,                # Latest year of GDP data in CSV file
+        "country_name": "Country Name",  # Country name field name
+        "country_code": "Country Code"   # Country code field name
+    }
+```
+
 ## Prerequisites
 To run the project, **Pygal** Python module is required. It is available in [PyPI](https://pypi.org/), and can be installed by typing the following command as *superuser*.
 ```sh
