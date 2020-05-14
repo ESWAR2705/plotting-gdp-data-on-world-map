@@ -55,7 +55,7 @@ al Albania
 am Armenia
 ...
 ```
-### ```gdpinfo``` dictionary
+### ```gdpinfo``` dictionary <a name="gdpinfo"></a>
 The ```gdpinfo``` is a GDP information dictionary. It specifies information about GDP data file. The current GDP data file ```isp_gdp.csv``` is downloaded from [course materials](https://storage.googleapis.com/codeskulptor-isp/course4/isp_gdp.csv) and contains the raw economic data collected from the World Bank. The first two columns of CSV file correspond to the *"Country Name"* and *"Country Code"* for each country in the file. Subsequent fields include GDP data (in current US dollars) for the years from 1960-2015 inclusive.
 
  **Important!** The current ```isp_gdp.csv``` file is slightly modified to handle missing GDP data in a more consistent manner.
@@ -75,7 +75,7 @@ The ```gdpinfo``` dictionary contains the following items.
         "country_code": "Country Code"   # Country code field name
     }
 ```
-### ```codeinfo``` dictionary
+### ```codeinfo``` dictionary <a name="codeinfo"></a>
 The ```codeinfo``` is a country code information dictionary that is used to access the country codes from the Open Knowledge Network's [collection](http://data.okfn.org/data/core/country-codes). The current version of country codes data is organised in ```isp_country_codes.csv``` file downloaded from [course materials](https://storage.googleapis.com/codeskulptor-isp/course4/isp_country_codes.csv).
 
  **Important!** The current ```isp_country_codes.csv``` file is slightly modified to handle missing GDP data in a more consistent manner.
@@ -96,30 +96,8 @@ To run the project, **Pygal** Python module is required. It is available in [PyP
 ```sh
 pip install pygal
 ```
-The application can be used explicitely with ```isp_gdp.csv file```. The current version of isp_gdp.csv file is downloaded from [course materials](https://storage.googleapis.com/codeskulptor-isp/course4/isp_gdp.csv). It contains GDP data up until the end of 2015, and this file is slightly updated to handle missing GDP data in a more consistent manner.
+The application can be used explicitely with ```isp_gdp.csv``` and ```isp_country_codes.csv``` files. To use data from another files, change the [```gdpinfo```](#gdpinfo) or [```codeinfo```](#codeinfo) dictionary structure accordingly.
 
-To use data from another file (including files with other separators), change the ```gdpinfo``` dictionary structure accordingly.
-```sh
-    gdpinfo = {
-        "gdpfile": "isp_gdp.csv",        # Name of the GDP CSV file
-        "separator": ",",                # Separator character in CSV file
-        "quote": '"',                    # Quote character in CSV file
-        "min_year": 1960,                # Oldest year of GDP data in CSV file
-        "max_year": 2015,                # Latest year of GDP data in CSV file
-        "country_name": "Country Name",  # Country name field name
-        "country_code": "Country Code"   # Country code field name
-    }
-```
-The application also can be used explicitely with ```isp_country_codes.csv``` file.
-```sh
-codeinfo = {
-        "codefile": "isp_country_codes.csv", # Name of the country code CSV file
-        "separator": ",",                    # Separator character in CSV file
-        "quote": '"',                        # Quote character in CSV file
-        "plot_codes": "ISO3166-1-Alpha-2",   # Plot code field name
-        "data_codes": "ISO3166-1-Alpha-3"    # GDP data code field name
-    }
-```
 ## Running
 To get GDP by country unified by common name, run the following command.
 ```sh
