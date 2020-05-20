@@ -1,27 +1,30 @@
 # Plotting GDP Data on World Map
+## Overwiew
 **Plotting GDP Data on World Map** is the final project of the [Python Data Visualization](https://www.coursera.org/learn/python-visualization/home/welcome)course on Coursera platform. 
 
 The main task of this project is to process the World Bank GDP data and build a dictionary whose values represented the GDP data for a given year that can be plotted with [Pygal](http://www.pygal.org/en/stable/index.html). 
-
+## Features
 The project consists of two parts.
 * [Part 1](#part1). To link Pygal's map dictionary (mapping 2-letter country codes to country names) to a dictionary that stored World Bank GDP country data keyed by the "Country Name" field and to plot GDP data on world map. 
 * [Part 2](#part2). To improve the quality of the world map plots created in Part 1 by creating a better mapping from pygal country codes to World Bank country names.
-## Part 1 <a name="part1"></a>
+### Part 1 <a name="part1"></a>
 In Part 1 the following problems are solved.
 1. Create a dictionary that maps Pygal country codes to World Bank country names (**reconcile_countries_by_name** function).
 2. Transform GDP data for given year into a form suitable for a world map plot (**build_map_dict_by_name** function). 
 
 The dictionary should map the country codes from ```plot_countries``` to the log (base 10) of the GDP for the associated country in the given year. (The logarithmic scaling is chosen to yield a better distribution of color shades in the final plot.) 
 
-3. Create an SVG image of the GDP data plotted on the world map (**render_world_map** function).
+3. Create an SVG image of the GDP data plotted on the world map (**render_world_map_in_file** function).
+5. Render the GDP data plotted on the world map in browser (**render_world_map_in_browser** function).
 
-## Part 2 <a name="part2"></a>
+### Part 2 <a name="part2"></a>
 In Part 2 the following problems are solved.
 
 1. Generate a dictionary that maps different country codes to each other (**build_country_code_converter** function).
 2. Create a dictionary that maps *Pygal* country codes to *World Bank* country codes (**reconcile_countries_by_code** function).
 3. Transform GDP data for given year into a form suitable for a world map plot (**build_map_dict_by_code** function). 
-4. Create an SVG image of the GDP data plotted on the world map (**render_world_map** function).
+4. Create an SVG image of the GDP data plotted on the world map (**render_world_map_in_file** function).
+5. Render the GDP data plotted on the world map in browser (**render_world_map_in_browser** function).
 
 In both parts of the project, for **build_map_dict_by_code** function the logarithmic scaling is chosen to yield a better distribution of color shades in the final plot.
 
