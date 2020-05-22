@@ -6,8 +6,9 @@ Unify data via common country name.
 import csv
 import math
 import pygal
+import os
 
-pygal_countries = pygal.maps.world.COUNTRIES
+plot_countries = pygal.maps.world.COUNTRIES
 
 gdpinfo = {
     "gdpfile": "isp_gdp.csv",
@@ -163,3 +164,21 @@ def render_world_map_in_browser(gdpinfo, plot_countries, year):
     gdp_worldmap_chart.render_in_browser()
 
     return
+
+# Get user input
+year = input("Enter year to build map: ")
+if int(gdpinfo["min_year"]) <= int(year) <= int(gdpinfo["max_year"]):
+    mode = input("Enter 1 to render map in browser or 2 to render map in file: ")
+    if mode == "1":
+        render_world_map_in_browser(gdpinfo, plot_countries, year)
+    elif mode == "2":
+        map_file = input("Enter file name to save GDP data with svg extension: ")
+        result = os.path.splitext(map_file)
+        if result[1] == ".svg":
+            render_world_map_in_file(gdpinfo, plot_countries, year, map_file)
+        else:
+            print("Enter a file name with valid extension.")
+    else:
+        print("Choose a valid option to render map.")
+else:
+    print("There is no data in your .csv file for this year.")
