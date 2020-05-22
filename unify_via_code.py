@@ -168,3 +168,30 @@ def render_world_map_in_file(gdpinfo, codeinfo, plot_countries, year, map_file):
     gdp_worldmap_chart.render_to_file(map_file)
 
     return
+
+def render_world_map_in_browser(gdpinfo, codeinfo, plot_countries, year):
+    """
+    Inputs:
+      gdpinfo        - A GDP information dictionary
+      codeinfo       - A country code information dictionary
+      plot_countries - Dictionary mapping plot library country codes to country names
+      year           - String year of data
+
+    Output:
+      Returns None.
+
+    Action:
+      Creates a world map plot of the GDP data in gdp_mapping and outputs
+      it to a browser.
+    """
+    country_codes, not_found, no_data = build_map_dict_by_code(gdpinfo, codeinfo, plot_countries, year)
+
+    gdp_worldmap_chart = pygal.maps.world.World()
+    title = "GDP by country for {} (log scale), unified by common country code".format(year)
+    gdp_worldmap_chart.title = title
+    gdp_worldmap_chart.add('GDP for {}'.format(year), country_codes)
+    gdp_worldmap_chart.add('Missing from World Bank Data', not_found)
+    gdp_worldmap_chart.add('No GDP data', no_data)
+    gdp_worldmap_chart.render_in_browser()
+
+    return
