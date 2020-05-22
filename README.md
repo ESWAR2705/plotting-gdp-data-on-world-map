@@ -1,8 +1,8 @@
 # Plotting GDP Data on World Map
 ## Overwiew
-**Plotting GDP Data on World Map** is the final project of the [Python Data Visualization](https://www.coursera.org/learn/python-visualization/home/welcome)course on Coursera platform. 
+**Plotting GDP Data on World Map** is the capstone project of the [Python Data Visualization](https://www.coursera.org/learn/python-visualization/home/welcome)course on Coursera platform. 
 
-The main task of this project is to process the World Bank GDP data and build a dictionary whose values represented the GDP data for a given year that can be plotted with [Pygal](http://www.pygal.org/en/stable/index.html). 
+The main task of this project is to process the [World Bank GDP data](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD) and build a dictionary whose values represented the GDP data for a given year that can be plotted with [Pygal](http://www.pygal.org/en/stable/index.html). 
 ## Features
 The project consists of two parts.
 * [Part 1](#part1). To link Pygal's map dictionary (mapping 2-letter country codes to country names) to a dictionary that stored World Bank GDP country data keyed by the "Country Name" field and to plot GDP data on world map. 
@@ -84,7 +84,8 @@ Cool tech stuff used in this project.
   * https://docs.python.org/3/library/csv.html
 * Python **math** library
   * https://docs.python.org/3/library/math.html
-http://www.pygal.org/en/stable/index.html
+* Python **os** library
+  * https://docs.python.org/3/library/os.html
 ## Getting Started
 ### Prerequisites
 To run the project, **Pygal** Python module is required. It is available in [PyPI](https://pypi.org/), and can be installed by typing the following command as *superuser*.
@@ -92,10 +93,6 @@ To run the project, **Pygal** Python module is required. It is available in [PyP
 pip install pygal
 ```
 The application can be used explicitely with ```isp_gdp.csv``` and ```isp_country_codes.csv``` files. To use data from another files, change the [```gdpinfo```](#gdpinfo) or [```codeinfo```](#codeinfo) dictionary structure accordingly.
-
-To render GDP plot in file, invoke **render_world_map_in_file** function.
-To render GDP plot in browser, invoke **render_world_map_in_browser** function.
-By default,  **render_world_map_in_browser** function is invoked.
 
 ### Running
 To get GDP by country unified by common name, run the following command.
@@ -106,8 +103,15 @@ To get GDP by country unified by common code, run the following command.
 ```sh
 $ python unify_via_code.py
 ```
+After running the corresponding file, follow the on-screen instructions.
+```sh
+Enter year to build map:
+Enter 1 to render map in_browser or 2 to render map in_file:
+# If option (2) is chosen
+Enter file name to save GDP data with svg extension:
+```
 Example of plotting GDP data on world map is shown below.
-![image](https://user-images.githubusercontent.com/53233637/82405590-373fa800-9a19-11ea-9358-8283348ebebf.png)
+![Plotting GDP data on world map](https://user-images.githubusercontent.com/53233637/82405590-373fa800-9a19-11ea-9358-8283348ebebf.png)
 
 ## Authors
 Alexandra Baturina
