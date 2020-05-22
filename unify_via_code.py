@@ -222,7 +222,7 @@ def render_world_map_in_browser(gdpinfo, codeinfo, plot_countries, year):
 # Get user input
 year = input("Enter year to build map: ")
 if int(gdpinfo["min_year"]) <= int(year) <= int(gdpinfo["max_year"]):
-    mode = input("Enter 1 to render map in browser or 2 to render map in file :")
+    mode = input("Enter 1 to render map in browser or 2 to render map in file: ")
     if mode == "1":
         render_world_map_in_browser(gdpinfo, codeinfo, plot_countries, year)
     elif mode == "2":
