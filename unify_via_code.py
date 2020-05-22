@@ -117,7 +117,28 @@ def build_map_dict_by_code(gdpinfo, codeinfo, plot_countries, year):
       codes from plot_countries that were found in the GDP data file, but
       have no GDP data for the specified year.
     """
+    plot_dict = {}
+    not_found = set()
+    no_data = set()
 
+    filename = gdpinfo["gdpfile"]
+    keyfield = gdpinfo['country_code']
+    separator = gdpinfo["separator"]
+    quote = gdpinfo["quote"]
+    gdp_countries = read_csv_as_nested_dict(filename, keyfield, separator, quote)
+
+    codes_mapping, not_found = reconcile_countries_by_code(codeinfo, plot_countries, gdp_countries)
+
+    for code in codes_mapping:
+        for gdp_code in gdp_countries:
+            if codes_mapping[code].upper() == gdp_code.upper():
+                if year in gdp_countries[gdp_code]:
+                    if gdp_countries[gdp_code][year] != "":
+                        plot_dict[code] = math.log10(float(gdp_countries[gdp_code][year]))
+                    else:
+                        no_data.add(code)
+
+    return plot_dict, not_found, no_data
 
 
 def render_world_map(gdpinfo, codeinfo, plot_countries, year, map_file):
