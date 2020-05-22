@@ -76,6 +76,15 @@ codeinfo = {
     }
 ```
 ### ```gdp_countries```, a dictionary whose keys are the country names used within the GDP data. 
+## Dev Dependencies
+Cool tech stuff used in this project.
+* ***Pygal*** Python data visualization library
+  * http://www.pygal.org/en/stable/documentation/index.html
+* Pyhton ***csv*** library
+  * https://docs.python.org/3/library/csv.html
+* Python ***math*** library
+  * https://docs.python.org/3/library/math.html
+http://www.pygal.org/en/stable/index.html
 ## Getting Started
 ### Prerequisites
 To run the project, **Pygal** Python module is required. It is available in [PyPI](https://pypi.org/), and can be installed by typing the following command as *superuser*.
