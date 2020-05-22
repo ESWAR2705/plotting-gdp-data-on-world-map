@@ -108,7 +108,7 @@ def build_map_dict_by_name(gdpinfo, plot_countries, year):
     return country_codes, not_found, no_data
 
 
-def render_world_map(gdpinfo, plot_countries, year, map_file):
+def render_world_map_in_file(gdpinfo, plot_countries, year, map_file):
     """
     Inputs:
       gdpinfo        - A GDP information dictionary
@@ -134,14 +134,32 @@ def render_world_map(gdpinfo, plot_countries, year, map_file):
     gdp_worldmap_chart.add('No GDP data', no_data)
     gdp_worldmap_chart.render_to_file(map_file)
 
-# 1960
-render_world_map(gdpinfo, pygal_countries, "1960", "isp_gdp_world_name_1960.svg")
+    return
 
-# 1980
-render_world_map(gdpinfo, pygal_countries, "1980", "isp_gdp_world_name_1980.svg")
 
-# 2000
-render_world_map(gdpinfo, pygal_countries, "2000", "isp_gdp_world_name_2000.svg")
+def render_world_map_in_browser(gdpinfo, plot_countries, year):
+    """
+    Inputs:
+      gdpinfo        - A GDP information dictionary
+      plot_countries - Dictionary whose keys are plot library country codes
+                       and values are the corresponding country name
+      year           - String year to create GDP mapping for
 
-# 2010
-render_world_map(gdpinfo, pygal_countries, "2010", "isp_gdp_world_name_2010.svg")
+    Output:
+      Returns None.
+
+    Action:
+      Creates a world map plot of the GDP data for the given year and
+      writes it to a file named by map_file.
+    """
+    country_codes, not_found, no_data = build_map_dict_by_name(gdpinfo, plot_countries, year)
+
+    gdp_worldmap_chart = pygal.maps.world.World()
+    title = "GDP by country for {} (log scale), unified by common country name".format(year)
+    gdp_worldmap_chart.title = title
+    gdp_worldmap_chart.add('GDP for {}'.format(year), country_codes)
+    gdp_worldmap_chart.add('Missing from World Bank Data', not_found)
+    gdp_worldmap_chart.add('No GDP data', no_data)
+    gdp_worldmap_chart.render_in_browser()
+
+    return
